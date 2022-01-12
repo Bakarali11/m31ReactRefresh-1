@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { Login } from "./components/login";
-import { signUpFetch } from "./utils";
+import { signUpFetch, tokenCheck } from "./utils";
 
 const App = () => {
   const [user, setUser] = useState();
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
+  useEffect(() => {
+    tokenCheck(localStorage.getItem("MyToken"), setUser);
+  }, []);
 
   const signUpHandler = async (e) => {
     e.preventDefault();
